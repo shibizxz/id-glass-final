@@ -15,15 +15,15 @@ const templates = {
     options: { bloodGroup: true },
     photo: { x: 151, y: 297, w: 370, h: 370, radius: 185 },
     fields: {
-      studentName: { x: 84, y: 682, w: 505, size: pt(10), weight: 600, align: "center", color: "#ffffff", transform: "upper" },
-      studentClass: { x: 76, y: 724, w: 520, size: pt(7.47), weight: 400, align: "center", color: "#ffffff", prefix: "Class: " },
-      admissionNo: { x: 180, y: 755, w: 315, size: pt(7.47), weight: 400, align: "center", color: "#ffffff", prefix: "Adm. No: " },
-      dob: { x: 160, y: 786, w: 240, size: pt(7.47), weight: 400, color: "#ffffff", prefix: "DOB: " },
-      bloodGroup: { x: 398, y: 786, w: 175, size: pt(7.47), weight: 400, color: "#ffffff", prefix: "Blood: " },
-      guardianName: { x: 124, y: 844, w: 430, size: pt(7.47), weight: 400, color: "#ffffff" },
-      houseName: { x: 124, y: 899, w: 430, size: pt(7.47), weight: 400, color: "#ffffff", lines: 2, lineHeight: 1.14 },
-      place: { x: 124, y: 951, w: 430, size: pt(7.47), weight: 400, color: "#ffffff" },
-      phone: { x: 124, y: 1001, w: 430, size: pt(7.47), weight: 400, color: "#ffffff" }
+      studentName: { x: 38, y: 682, w: 597, size: pt(12), weight: 600, align: "center", color: "#ffffff", transform: "upper" },
+      studentClass: { x: 76, y: 724, w: 520, size: pt(9.5), weight: 400, align: "center", color: "#ffffff", prefix: "Class : " },
+      admissionNo: { x: 180, y: 755, w: 315, size: pt(9.5), weight: 400, align: "center", color: "#ffffff", prefix: "Adm. No : " },
+      dob: { x: 108, y: 786, w: 292, size: pt(9.5), minSize: pt(9.5), weight: 400, color: "#ffffff", prefix: "DOB : " },
+      bloodGroup: { x: 408, y: 786, w: 170, size: pt(9.5), weight: 400, color: "#ffffff", prefix: "Blood : " },
+      guardianName: { x: 124, y: 844, w: 430, size: pt(9.5), weight: 400, color: "#ffffff" },
+      houseName: { x: 124, y: 899, w: 430, size: pt(9.5), weight: 400, color: "#ffffff", minSize: pt(6.5) },
+      place: { x: 124, y: 951, w: 430, size: pt(9.5), weight: 400, color: "#ffffff" },
+      phone: { x: 124, y: 1001, w: 430, size: pt(9.5), weight: 400, color: "#ffffff" }
     }
   },
   template2: {
@@ -31,17 +31,17 @@ const templates = {
     image: "/assets/templates/template-2.bmp?v=20260513-new-psds",
     password: "cheru123",
     options: { bloodGroup: true },
-    photo: { x: 157, y: 244, w: 379, h: 374, radius: 187 },
+    photo: { x: 160, y: 244, w: 374, h: 374, radius: 187 },
     fields: {
-      studentName: { x: 96, y: 648, w: 500, size: pt(10), weight: 600, align: "center", color: "#000000", transform: "upper" },
-      studentClass: { x: 76, y: 692, w: 520, size: pt(7.47), weight: 400, align: "center", color: "#000000", prefix: "Class: " },
-      admissionNo: { x: 180, y: 724, w: 315, size: pt(7.47), weight: 400, align: "center", color: "#000000", prefix: "Adm. No: " },
-      dob: { x: 160, y: 754, w: 240, size: pt(7.47), weight: 400, color: "#000000", prefix: "DOB: " },
-      bloodGroup: { x: 398, y: 754, w: 175, size: pt(7.47), weight: 400, color: "#000000", prefix: "Blood: " },
-      guardianName: { x: 86, y: 839, w: 510, size: pt(7.47), weight: 400, color: "#000000" },
-      houseName: { x: 86, y: 890, w: 510, size: pt(7.47), weight: 400, color: "#000000", lines: 2, lineHeight: 1.14 },
-      place: { x: 86, y: 943, w: 510, size: pt(7.47), weight: 400, color: "#000000" },
-      phone: { x: 86, y: 993, w: 510, size: pt(7.47), weight: 400, color: "#000000" }
+      studentName: { x: 38, y: 648, w: 597, size: pt(12), weight: 600, align: "center", color: "#000000", transform: "upper" },
+      studentClass: { x: 76, y: 692, w: 520, size: pt(9.5), weight: 400, align: "center", color: "#000000", prefix: "Class : " },
+      admissionNo: { x: 180, y: 724, w: 315, size: pt(9.5), weight: 400, align: "center", color: "#000000", prefix: "Adm. No : " },
+      dob: { x: 108, y: 754, w: 292, size: pt(9.5), minSize: pt(9.5), weight: 400, color: "#000000", prefix: "DOB : " },
+      bloodGroup: { x: 408, y: 754, w: 170, size: pt(9.5), weight: 400, color: "#000000", prefix: "Blood : " },
+      guardianName: { x: 86, y: 839, w: 510, size: pt(9.5), weight: 400, color: "#000000" },
+      houseName: { x: 86, y: 890, w: 510, size: pt(9.5), weight: 400, color: "#000000", minSize: pt(6.5) },
+      place: { x: 86, y: 943, w: 510, size: pt(9.5), weight: 400, color: "#000000" },
+      phone: { x: 86, y: 993, w: 510, size: pt(9.5), weight: 400, color: "#000000" }
     }
   }
 };
@@ -68,7 +68,6 @@ const cropDialog = document.getElementById("cropDialog");
 const cropCanvas = document.getElementById("cropCanvas");
 const cropCtx = cropCanvas.getContext("2d");
 const zoomRange = document.getElementById("zoomRange");
-const cropShape = document.getElementById("cropShape");
 
 const inputs = {
   templateKey: document.getElementById("templateKey"),
@@ -195,11 +194,23 @@ function renderPreview() {
   inputs.admissionNo.value = data.admissionNo;
 
   const template = templates[state.templateKey];
+  const scale = getPreviewScale();
   for (const [key, config] of Object.entries(template.fields)) {
     const node = editableLayer.querySelector(`[data-field="${key}"]`);
     if (!node) continue;
     const value = fieldValue(key, getFormData());
     node.textContent = formatTemplateText(value, config);
+    fitPreviewText(node, config, scale);
+  }
+}
+
+function fitPreviewText(node, config, scale) {
+  let size = Math.max(8, config.size * scale);
+  const minSize = Math.max(8, (config.minSize || 8) * scale);
+  node.style.fontSize = `${size}px`;
+  while ((node.scrollWidth > node.clientWidth || node.scrollHeight > node.clientHeight) && size > minSize) {
+    size -= 0.5;
+    node.style.fontSize = `${size}px`;
   }
 }
 
@@ -247,6 +258,7 @@ function isSchoolUnlocked() {
 
 function applySchoolLock() {
   const unlocked = isSchoolUnlocked();
+  schoolLock.classList.remove("is-hidden");
   schoolLock.classList.toggle("is-unlocked", unlocked);
   schoolPassword.disabled = unlocked;
   unlockSchoolBtn.disabled = unlocked;
@@ -280,7 +292,6 @@ function openCropper(file) {
       state.crop.offsetX = 0;
       state.crop.offsetY = 0;
       zoomRange.value = "1";
-      cropShape.value = "circle";
       cropDialog.showModal();
       drawCrop();
     };
@@ -311,23 +322,19 @@ function drawCropGuide() {
   cropCtx.lineWidth = 3;
   cropCtx.setLineDash([9, 7]);
 
-  if (cropShape.value === "circle") {
-    const radius = Math.min(cropCanvas.width, cropCanvas.height) * 0.44;
-    const centerX = cropCanvas.width / 2;
-    const centerY = cropCanvas.height / 2;
+  const radius = Math.min(cropCanvas.width, cropCanvas.height) * 0.44;
+  const centerX = cropCanvas.width / 2;
+  const centerY = cropCanvas.height / 2;
 
-    cropCtx.fillStyle = "rgba(0, 0, 0, 0.34)";
-    cropCtx.beginPath();
-    cropCtx.rect(0, 0, cropCanvas.width, cropCanvas.height);
-    cropCtx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-    cropCtx.fill("evenodd");
+  cropCtx.fillStyle = "rgba(0, 0, 0, 0.34)";
+  cropCtx.beginPath();
+  cropCtx.rect(0, 0, cropCanvas.width, cropCanvas.height);
+  cropCtx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+  cropCtx.fill("evenodd");
 
-    cropCtx.beginPath();
-    cropCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    cropCtx.stroke();
-  } else {
-    cropCtx.strokeRect(12, 12, cropCanvas.width - 24, cropCanvas.height - 24);
-  }
+  cropCtx.beginPath();
+  cropCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+  cropCtx.stroke();
 
   cropCtx.restore();
 }
@@ -335,10 +342,9 @@ function drawCropGuide() {
 function applyCrop() {
   const image = state.cropImage;
   if (!image) return;
-  const isCircle = cropShape.value === "circle";
   const output = document.createElement("canvas");
-  output.width = isCircle ? 800 : 600;
-  output.height = isCircle ? 800 : 800;
+  output.width = 800;
+  output.height = 800;
   const ctx = output.getContext("2d");
   const baseScale = Math.max(cropCanvas.width / image.width, cropCanvas.height / image.height);
   const scale = baseScale * Number(zoomRange.value);
@@ -347,29 +353,23 @@ function applyCrop() {
   const x = (cropCanvas.width - width) / 2 + state.crop.offsetX;
   const y = (cropCanvas.height - height) / 2 + state.crop.offsetY;
 
-  if (isCircle) {
-    const sourceRadius = Math.min(cropCanvas.width, cropCanvas.height) * 0.44;
-    const cropLeft = cropCanvas.width / 2 - sourceRadius;
-    const cropTop = cropCanvas.height / 2 - sourceRadius;
-    const factor = output.width / (sourceRadius * 2);
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(output.width / 2, output.height / 2, output.width / 2, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.drawImage(
-      image,
-      (x - cropLeft) * factor,
-      (y - cropTop) * factor,
-      width * factor,
-      height * factor
-    );
-    ctx.restore();
-    state.croppedPhoto = output.toDataURL("image/png");
-  } else {
-    const factor = output.width / cropCanvas.width;
-    ctx.drawImage(image, x * factor, y * factor, width * factor, height * factor);
-    state.croppedPhoto = output.toDataURL("image/jpeg", 0.92);
-  }
+  const sourceRadius = Math.min(cropCanvas.width, cropCanvas.height) * 0.44;
+  const cropLeft = cropCanvas.width / 2 - sourceRadius;
+  const cropTop = cropCanvas.height / 2 - sourceRadius;
+  const factor = output.width / (sourceRadius * 2);
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(output.width / 2, output.height / 2, output.width / 2, 0, Math.PI * 2);
+  ctx.clip();
+  ctx.drawImage(
+    image,
+    (x - cropLeft) * factor,
+    (y - cropTop) * factor,
+    width * factor,
+    height * factor
+  );
+  ctx.restore();
+  state.croppedPhoto = output.toDataURL("image/png");
   photoLayer.src = state.croppedPhoto;
   photoLayer.style.display = "block";
   document.getElementById("photoStatus").textContent = "Selected";
@@ -416,6 +416,7 @@ async function renderCardCanvas() {
 function drawFittedText(ctx, text, config) {
   if (!text) return;
   let size = config.size;
+  const minSize = config.minSize || 12;
   const cover = config.cover === false ? "" : config.cover || templates[state.templateKey].cover || "";
   if (cover) {
     ctx.fillStyle = cover;
@@ -424,7 +425,7 @@ function drawFittedText(ctx, text, config) {
   ctx.fillStyle = config.color;
   ctx.textBaseline = "top";
   ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
-  while (ctx.measureText(text).width > config.w && size > 12) {
+  while (ctx.measureText(text).width > config.w && size > minSize) {
     size -= 1;
     ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
   }
@@ -451,6 +452,11 @@ function drawFittedText(ctx, text, config) {
 }
 
 function drawWrappedText(ctx, text, config, size) {
+  const fittedSize = fitWrappedCanvasText(ctx, text, config, size);
+  if (fittedSize !== size) {
+    size = fittedSize;
+    ctx.font = `${config.weight || 700} ${size}px ${FONT_FAMILY}`;
+  }
   const words = text.split(/\s+/).filter(Boolean);
   const lines = [];
   let current = "";
@@ -479,6 +485,33 @@ function drawWrappedText(ctx, text, config, size) {
     if (index === config.lines - 1 && output !== line) output = `${output}…`;
     ctx.fillText(output, config.x, config.y + index * lineHeight);
   });
+}
+
+function fitWrappedCanvasText(ctx, text, config, size) {
+  const minSize = config.minSize || 12;
+  let fittedSize = size;
+  while (fittedSize > minSize && wrappedLineCount(ctx, text, config.w, config.lines) > config.lines) {
+    fittedSize -= 1;
+    ctx.font = `${config.weight || 700} ${fittedSize}px ${FONT_FAMILY}`;
+  }
+  return fittedSize;
+}
+
+function wrappedLineCount(ctx, text, width, maxLines) {
+  const words = text.split(/\s+/).filter(Boolean);
+  let count = 1;
+  let current = "";
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (ctx.measureText(next).width <= width || !current) {
+      current = next;
+    } else {
+      count += 1;
+      current = word;
+      if (count > maxLines) return count;
+    }
+  }
+  return words.length ? count : 0;
 }
 
 function loadImage(src) {
@@ -633,7 +666,7 @@ for (const input of Object.values(inputs)) {
     if (input === inputs.templateKey) {
       state.templateKey = input.value;
       schoolPassword.value = "";
-      showMessage(isSchoolUnlocked() ? "School template unlocked." : "Enter the school password.");
+      showMessage("");
     }
     applyTemplate();
   };
@@ -658,7 +691,6 @@ schoolPassword.addEventListener("keydown", event => {
   }
 });
 zoomRange.addEventListener("input", drawCrop);
-cropShape.addEventListener("change", drawCrop);
 window.addEventListener("resize", applyTemplate);
 
 cropCanvas.addEventListener("pointerdown", event => {

@@ -555,14 +555,13 @@ button.primary:hover {
 
 #cropCanvas {
   width: min(72vw, 360px);
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.68);
   border-radius: 8px;
   background: #111827;
   touch-action: none;
 }
 
-.crop-shape-label,
 .zoom-label {
   grid-template-columns: 56px 1fr;
   align-items: center;
