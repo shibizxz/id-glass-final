@@ -34,21 +34,12 @@
               <h2>Student Details</h2>
               <p>Enter the card content and submit.</p>
             </div>
-            <label class="template-select">
-              Template
-              <select id="templateKey" aria-label="Template">
-                <option value="template1">Arafa English School</option>
-                <option value="template2">G H S S Cheruthuruthy</option>
-              </select>
+            <label class="school-search">
+              School
+              <input id="schoolSearch" type="search" autocomplete="off" placeholder="Search school name" aria-controls="schoolResults" aria-expanded="false" />
+              <input id="templateKey" type="hidden" value="template1" />
+              <div class="school-results" id="schoolResults" role="listbox"></div>
             </label>
-          </div>
-
-          <div class="school-lock" id="schoolLock">
-            <label>
-              School password
-              <input id="schoolPassword" type="password" autocomplete="current-password" />
-            </label>
-            <button type="button" class="primary" id="unlockSchoolBtn">Unlock</button>
           </div>
 
           <div class="section-label">Identity</div>
@@ -180,6 +171,80 @@
           </div>
         </section>
       </section>
+
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div>
+            <p class="eyebrow">FREAKKING MEDIA</p>
+            <h2>Creative solutions for every business need</h2>
+          </div>
+          <div class="footer-links">
+            <a href="tel:+918111985415" aria-label="Call Freakking Media">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.32 1.76.59 2.6a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.16-1.16a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.6.59A2 2 0 0 1 22 16.92Z" />
+              </svg>
+              +91 8111985415
+            </a>
+            <a href="mailto:snehastudiopynkulam@gmail.com" aria-label="Email Freakking Media">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                <path d="m22 7-10 6L2 7" />
+              </svg>
+              snehastudiopynkulam@gmail.com
+            </a>
+          </div>
+        </div>
+        <div class="footer-services">
+          <div class="footer-group">
+            <h3>Design Services</h3>
+            <ul>
+              <li>Social Media Poster</li>
+              <li>Logo Design</li>
+              <li>Menu Design</li>
+              <li>Flyer Design</li>
+              <li>Banner Design</li>
+              <li>Standee Design</li>
+              <li>Brochure Design</li>
+              <li>Catalogue Design</li>
+              <li>Portfolio Design</li>
+              <li>ID Card Designing &amp; Printing</li>
+              <li>Product Packaging</li>
+            </ul>
+          </div>
+          <div class="footer-group">
+            <h3>Advertising</h3>
+            <ul>
+              <li>Print Advertising</li>
+              <li>Broadcast Advertising</li>
+              <li>Outdoor Advertising</li>
+              <li>Digital / Online Advertising</li>
+              <li>Social Media Advertising</li>
+              <li>Covert / Product Placement</li>
+            </ul>
+          </div>
+          <div class="footer-group">
+            <h3>Development</h3>
+            <ul>
+              <li>Website Development</li>
+              <li>Web App Development</li>
+            </ul>
+          </div>
+          <div class="footer-group">
+            <h3>Media</h3>
+            <ul>
+              <li>Music Editing</li>
+              <li>Video Editing</li>
+              <li>Television and Stage Advertisements</li>
+              <li>Film Star Shows</li>
+              <li>Musical Programmes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 FREAKKING MEADIA. All rights reserved.</span>
+          <span>Powered by Webappzz Technologies</span>
+        </div>
+      </footer>
     </main>
 
     <dialog class="crop-dialog" id="cropDialog">
@@ -196,6 +261,24 @@
       </div>
     </dialog>
 
-    <script src="/app.js?v=20260514-circle-crop"></script>
+    <dialog class="password-dialog" id="passwordDialog">
+      <div class="password-shell">
+        <div>
+          <p class="eyebrow">School Password</p>
+          <h3 id="passwordTitle">Unlock school</h3>
+          <p id="passwordSchoolName"></p>
+        </div>
+        <label>
+          Password
+          <input id="schoolPassword" type="password" autocomplete="current-password" />
+        </label>
+        <div class="actions compact">
+          <button type="button" id="cancelPasswordBtn">Cancel</button>
+          <button type="button" class="primary" id="unlockSchoolBtn">Unlock</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="/app.js?v=20260514-school-search"></script>
   </body>
 </html>

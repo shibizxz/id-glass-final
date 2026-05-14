@@ -46,6 +46,12 @@ const templates = {
   }
 };
 
+const schoolOptions = Object.entries(templates).map(([key, template]) => ({
+  key,
+  name: template.name,
+  search: template.name.toLowerCase()
+}));
+
 const state = {
   templateKey: "template1",
   cardId: makeCardId(),
@@ -61,9 +67,13 @@ const cardPreview = document.getElementById("cardPreview");
 const templateBg = document.getElementById("templateBg");
 const photoLayer = document.getElementById("photoLayer");
 const editableLayer = document.getElementById("editableLayer");
-const schoolLock = document.getElementById("schoolLock");
+const schoolSearch = document.getElementById("schoolSearch");
+const schoolResults = document.getElementById("schoolResults");
+const passwordDialog = document.getElementById("passwordDialog");
+const passwordSchoolName = document.getElementById("passwordSchoolName");
 const schoolPassword = document.getElementById("schoolPassword");
 const unlockSchoolBtn = document.getElementById("unlockSchoolBtn");
+const cancelPasswordBtn = document.getElementById("cancelPasswordBtn");
 const cropDialog = document.getElementById("cropDialog");
 const cropCanvas = document.getElementById("cropCanvas");
 const cropCtx = cropCanvas.getContext("2d");
@@ -71,6 +81,7 @@ const zoomRange = document.getElementById("zoomRange");
 
 const inputs = {
   templateKey: document.getElementById("templateKey"),
+  schoolSearch,
   studentName: document.getElementById("studentName"),
   admissionNo: document.getElementById("admissionNo"),
   studentClass: document.getElementById("studentClass"),
@@ -258,27 +269,75 @@ function isSchoolUnlocked() {
 
 function applySchoolLock() {
   const unlocked = isSchoolUnlocked();
-  schoolLock.classList.remove("is-hidden");
-  schoolLock.classList.toggle("is-unlocked", unlocked);
-  schoolPassword.disabled = unlocked;
-  unlockSchoolBtn.disabled = unlocked;
-  unlockSchoolBtn.textContent = unlocked ? "Unlocked" : "Unlock";
-
   form.querySelectorAll("input, select, button").forEach(control => {
-    if (control === inputs.templateKey || control === schoolPassword || control === unlockSchoolBtn) return;
+    if (
+      control === inputs.templateKey ||
+      control === schoolSearch ||
+      control === schoolPassword ||
+      control === unlockSchoolBtn ||
+      control === cancelPasswordBtn ||
+      control.classList.contains("school-result")
+    ) {
+      return;
+    }
     control.disabled = !unlocked;
   });
+}
+
+function renderSchoolSearchResults() {
+  const query = schoolSearch.value.trim().toLowerCase();
+  const matches = schoolOptions
+    .filter(option => !query || option.search.includes(query))
+    .slice(0, 12);
+
+  if (!matches.length) {
+    schoolResults.innerHTML = `<div class="school-empty">No matching schools</div>`;
+  } else {
+    schoolResults.innerHTML = matches
+      .map(option => `<button type="button" class="school-result" role="option" data-template-key="${option.key}">${option.name}</button>`)
+      .join("");
+  }
+
+  const isOpen = document.activeElement === schoolSearch || Boolean(query);
+  schoolResults.classList.toggle("is-open", isOpen);
+  schoolSearch.setAttribute("aria-expanded", String(isOpen));
+}
+
+function closeSchoolResults() {
+  schoolResults.classList.remove("is-open");
+  schoolSearch.setAttribute("aria-expanded", "false");
+}
+
+function selectSchool(templateKey) {
+  if (!templates[templateKey]) return;
+  state.templateKey = templateKey;
+  inputs.templateKey.value = templateKey;
+  schoolSearch.value = templates[templateKey].name;
+  schoolPassword.value = "";
+  closeSchoolResults();
+  showMessage("");
+  applyTemplate();
+
+  if (isSchoolUnlocked()) {
+    return;
+  }
+
+  passwordSchoolName.textContent = templates[templateKey].name;
+  passwordDialog.showModal();
+  schoolPassword.focus();
 }
 
 function unlockSelectedSchool() {
   const template = templates[state.templateKey];
   if (schoolPassword.value.trim() !== template.password) {
     showMessage("Wrong school password.");
+    schoolPassword.focus();
     return;
   }
   state.unlockedSchools.add(state.templateKey);
   schoolPassword.value = "";
   showMessage("School template unlocked.", true);
+  passwordDialog.close();
   applySchoolLock();
 }
 
@@ -661,18 +720,29 @@ async function sendEmail() {
   }
 }
 
-for (const input of Object.values(inputs)) {
+for (const input of Object.values(inputs).filter(input => input !== inputs.templateKey && input !== inputs.schoolSearch)) {
   const updateFromInput = () => {
-    if (input === inputs.templateKey) {
-      state.templateKey = input.value;
-      schoolPassword.value = "";
-      showMessage("");
-    }
     applyTemplate();
   };
   input.addEventListener("input", updateFromInput);
   input.addEventListener("change", updateFromInput);
 }
+
+schoolSearch.value = templates[state.templateKey].name;
+schoolSearch.addEventListener("input", renderSchoolSearchResults);
+schoolSearch.addEventListener("focus", renderSchoolSearchResults);
+schoolSearch.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeSchoolResults();
+});
+schoolResults.addEventListener("click", event => {
+  const button = event.target.closest("[data-template-key]");
+  if (!button) return;
+  selectSchool(button.dataset.templateKey);
+});
+document.addEventListener("click", event => {
+  if (event.target === schoolSearch || schoolResults.contains(event.target)) return;
+  closeSchoolResults();
+});
 
 document.getElementById("photoInput").addEventListener("change", event => {
   const file = event.target.files[0];
@@ -684,6 +754,10 @@ document.getElementById("cancelCropBtn").addEventListener("click", () => cropDia
 document.getElementById("pdfBtn").addEventListener("click", downloadPdf);
 document.getElementById("sendEmailBtn").addEventListener("click", sendEmail);
 unlockSchoolBtn.addEventListener("click", unlockSelectedSchool);
+cancelPasswordBtn.addEventListener("click", () => {
+  schoolPassword.value = "";
+  passwordDialog.close();
+});
 schoolPassword.addEventListener("keydown", event => {
   if (event.key === "Enter") {
     event.preventDefault();
